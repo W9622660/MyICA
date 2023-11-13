@@ -8,39 +8,24 @@ import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.AlertDialog
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.TextButton
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Book
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.LocalPolice
 import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material3.Card
-import androidx.compose.material3.FabPosition
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -51,18 +36,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.myica.model.Post
-import com.example.myica.ui.theme.DiaryTheme
+import com.example.myica.theme.DiaryTheme
 import com.example.myica.viewmodel.PostViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -96,7 +77,7 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.primary
+                    color = MaterialTheme.colorScheme.onPrimary
                 ) {
                     if (logining.value) {
                         loginScreen(auth, logining)
@@ -123,25 +104,21 @@ class MainActivity : ComponentActivity() {
         Greeting(name = "Welcome to UKPoliceApp")
     }
 
+
     @Composable
     fun Greeting(name: String) {
-
+        val logining = remember { mutableStateOf(true) }
         Column {
-            androidx.compose.material.Text(text = "Hello $name!")
-            Button(onClick = {
-                auth.signOut()
-                             },
-                content = {
-                    Text(
-                        text = "Logout",
-                        fontWeight = FontWeight.Bold
-                    )
-                },
-                shape = RoundedCornerShape(20.dp),
+            Text(
+                text = "Hello $name!",
+                fontSize = 35.sp,
+                fontWeight = FontWeight.Bold,
                 modifier = Modifier
+                    .padding(bottom = 100.dp)
+                    .align(Alignment.CenterHorizontally)
                     .fillMaxWidth()
-                    .padding(start = 100.dp, end = 100.dp, top = 10.dp, bottom = 10.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xffec7b01)))
+
+            )
         }
     }
     @RequiresApi(Build.VERSION_CODES.O)
@@ -218,7 +195,7 @@ class MainActivity : ComponentActivity() {
                     .height(150.dp)
             )
             Text(
-                text = "UKPolice App",
+                text = "UK Police App",
                 fontSize = 35.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 100.dp)
@@ -271,6 +248,9 @@ class MainActivity : ComponentActivity() {
             } else {
                 Button(
                     onClick = {
+                        if(email.equals("") || pass.equals("")){
+                            Log.d("ERROR", "Email or password shouldn't be empty. Try again.")
+                        }
                         auth.signInWithEmailAndPassword(email.value, pass.value)
                             .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
