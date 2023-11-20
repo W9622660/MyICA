@@ -43,7 +43,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.myica.theme.DiaryTheme
+import com.example.myica.theme.UKPoliceTheme
 import com.example.myica.viewmodel.PostViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -70,7 +70,7 @@ class MainActivity : ComponentActivity() {
         db = Firebase.firestore
 
         setContent {
-            DiaryTheme {
+            UKPoliceTheme {
                 val openDialog = remember { mutableStateOf(false) }
                 val logining = remember { mutableStateOf(true) }
 
