@@ -20,8 +20,6 @@ import uk.ac.tees.w9622660.ukpolicenewsapp.presentation.newsDetails.DetailsViewM
 import uk.ac.tees.w9622660.ukpolicenewsapp.presentation.onboarding.OnBoardingViewModel
 import uk.ac.tees.w9622660.ukpolicenewsapp.presentation.onboarding.components.OnBoardingScreen
 
-
-
 @Composable
 fun NavGraph(
     startDestination : String
