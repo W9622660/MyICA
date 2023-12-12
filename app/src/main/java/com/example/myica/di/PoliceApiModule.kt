@@ -21,7 +21,6 @@ object PoliceApiModule {
         return builder
             .build()
             .create(PoliceAPI::class.java)
-
     }
 
     /**

@@ -2,6 +2,7 @@ package com.example.myica.data.repository
 
 import com.example.myica.data.api.PoliceAPI
 import com.example.myica.data.api.model.Force
+import com.example.myica.data.api.model.Crime
 import javax.inject.Inject
 
 class  PoliceRepo @Inject constructor(
@@ -10,5 +11,9 @@ class  PoliceRepo @Inject constructor(
 
     suspend fun getForces():List<Force>{
         return policeAPI.getForce()
+    }
+
+    suspend fun getAllCrimes():List<Crime>{
+        return policeAPI.getAllCrimes("52.629729", "-1.131592")
     }
 }

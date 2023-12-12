@@ -1,6 +1,7 @@
 package com.example.myica.ui.login
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -128,6 +129,7 @@ fun loginScreen(navController: NavController, auth: FirebaseAuth, logining: Muta
                             } else
                                 Log.d("DEBUG", "Logging fail")
                         }
+
                 },
                 content = {
                     Text(
