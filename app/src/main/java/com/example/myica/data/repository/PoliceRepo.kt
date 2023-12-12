@@ -8,12 +8,10 @@ import javax.inject.Inject
 class  PoliceRepo @Inject constructor(
     private val policeAPI: PoliceAPI
 ){
-
     suspend fun getForces():List<Force>{
         return policeAPI.getForce()
     }
-
     suspend fun getAllCrimes():List<Crime>{
-        return policeAPI.getAllCrimes("52.629729", "-1.131592")
+        return policeAPI.getAllCrimes("54.5680362", "-1.2417789")
     }
 }
