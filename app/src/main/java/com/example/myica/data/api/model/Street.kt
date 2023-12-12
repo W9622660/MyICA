@@ -10,6 +10,4 @@ data class Street (
   val id: String,
   @Json(name = "name")
   val name: String?
-
-
 )

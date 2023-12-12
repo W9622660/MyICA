@@ -12,9 +12,6 @@ fun Details() {
 
     val detailViewModel = viewModel(modelClass = DetailViewModel::class.java)
     val state by detailViewModel.state.collectAsState()
-
-    // Back arrow for navigation
-
 }
 
 
