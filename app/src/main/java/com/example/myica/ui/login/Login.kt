@@ -89,18 +89,28 @@ fun loginScreen(navController: NavController, auth: FirebaseAuth, logining: Muta
             )
             androidx.compose.material.Button(
                 onClick = {
-                    if (pass.value == pass2.value) {
-                        auth.createUserWithEmailAndPassword(email.value, pass.value)
-                            .addOnCompleteListener { task ->
-                                if (task.isSuccessful) {
-                                    logining.value = false
-                                    Log.d("DEBUG", "Create new user successful")
+                    if (email.value.equals("") || pass.value.equals("")) {
+                        Log.d("ERROR", "Email or password shouldn't be empty. Try again.")
+                        Toast.makeText(context, "Email or password shouldn't be empty. Try again.", Toast.LENGTH_LONG).show()
+                        navController?.navigate(MainDestinations.LOGIN_ROUTE)
+                    }else{
+                        if (pass.value == pass2.value) {
+                            auth.createUserWithEmailAndPassword(email.value, pass.value)
+                                .addOnCompleteListener { task ->
+                                    if (task.isSuccessful) {
+                                        logining.value = false
+                                        Log.d("DEBUG", "Create new user successful")
 
-                                    Toast.makeText(context, "Create new user successful", Toast.LENGTH_LONG).show()
-                                } else
-                                    Log.d("DEBUG", "Create new user fail")
-                                Toast.makeText(context, "Create new user fail" + task.exception?.localizedMessage, Toast.LENGTH_LONG).show()
-                            }
+                                        Toast.makeText(context, "Create new user successful", Toast.LENGTH_SHORT).show()
+                                    } else
+                                        Log.d("DEBUG", "Create new user fail")
+                                    Toast.makeText(context, "Create new user fail" + task.exception?.localizedMessage, Toast.LENGTH_SHORT).show()
+                                }
+                        }else{
+                            Log.d("ERROR", "Passwords doesn't match")
+                            Toast.makeText(context, "Passwords doesn't match", Toast.LENGTH_SHORT).show()
+                            navController?.navigate(MainDestinations.LOGIN_ROUTE)
+                        }
                     }
                 },
                 content = {
@@ -123,22 +133,23 @@ fun loginScreen(navController: NavController, auth: FirebaseAuth, logining: Muta
         } else {
             androidx.compose.material.Button(
                 onClick = {
-                    if (email.equals("") || pass.equals("")) {
+                    if (email.value.equals("") || pass.value.equals("")) {
                         Log.d("ERROR", "Email or password shouldn't be empty. Try again.")
-                        Toast.makeText(context, "Email or password shouldn't be empty. Try again.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, "Email or password shouldn't be empty. Try again.", Toast.LENGTH_SHORT).show()
+                        navController?.navigate(MainDestinations.LOGIN_ROUTE)
+                    }else{
+                        auth.signInWithEmailAndPassword(email.value, pass.value)
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    logining.value = false
+                                    Log.d("DEBUG", "Logging successful")
+                                    Toast.makeText(context, "Logging successful", Toast.LENGTH_LONG).show()
+                                    navController?.navigate(MainDestinations.HOME_ROUTE)
+                                } else
+                                    Log.d("DEBUG", "Logging fail" + task.exception.toString())
+                                Toast.makeText(context, "Logging fail - " + task.exception?.localizedMessage, Toast.LENGTH_LONG).show()
+                            }
                     }
-                    auth.signInWithEmailAndPassword(email.value, pass.value)
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                logining.value = false
-                                Log.d("DEBUG", "Logging successful")
-                                Toast.makeText(context, "Logging successful", Toast.LENGTH_LONG).show()
-                                navController?.navigate(MainDestinations.HOME_ROUTE)
-                            } else
-                                Log.d("DEBUG", "Logging fail" + task.exception.toString())
-                            Toast.makeText(context, "Logging fail - " + task.exception?.localizedMessage, Toast.LENGTH_LONG).show()
-                        }
-
                 },
                 content = {
                     Text(
