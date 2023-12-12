@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "712299360822",
-    "project_id": "ukpolicecrime",
-    "storage_bucket": "ukpolicecrime.appspot.com"
+    "project_number": "794239399116",
+    "project_id": "ukpoliceapp",
+    "storage_bucket": "ukpoliceapp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:712299360822:android:89bf346b83947fa4c25e97",
+        "mobilesdk_app_id": "1:794239399116:android:3b770f144f027184c9be69",
         "android_client_info": {
           "package_name": "com.example.myica"
         }
@@ -15,7 +15,26 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBR6R6QyKni-BpUQhzNboCSm3DtAOb9Ykc"
+          "current_key": "AIzaSyDVICI6B_p3wvS1du2D_2BXsmgal5HvPlU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:794239399116:android:e4826d76c5a13cacc9be69",
+        "android_client_info": {
+          "package_name": "com.wamcdevs.habitsappmvvm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVICI6B_p3wvS1du2D_2BXsmgal5HvPlU"
         }
       ],
       "services": {
