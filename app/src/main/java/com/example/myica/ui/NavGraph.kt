@@ -53,10 +53,6 @@ fun NavGraph(startDestination: String = MainDestinations.SPLASH_ROUTE) {
             val homeViewModel: HomeViewModel = hiltViewModel()
             HomeScreen(navController,homeViewModel)
         }
-     /*   composable(route = MainDestinations.NEIGHBOURHOODS_ROUTE) {
-            val detailViewModel: DetailViewModel = hiltViewModel()
-            Details(navController,detailViewModel)
-        }*/
         composable(route = MainDestinations.SEARCH_ROUTE) {
             val searchViewModel: SearchViewModel = hiltViewModel()
             SearchScreen(navController,searchViewModel)
