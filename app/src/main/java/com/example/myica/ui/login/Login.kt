@@ -1,5 +1,6 @@
 package com.example.myica.ui.login
 
+import android.health.connect.datatypes.units.Length
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
@@ -23,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -50,6 +52,7 @@ fun loginScreen(navController: NavController, auth: FirebaseAuth, logining: Muta
     val registering = remember {
         mutableStateOf(false)
     }
+    val context = LocalContext.current
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -92,8 +95,11 @@ fun loginScreen(navController: NavController, auth: FirebaseAuth, logining: Muta
                                 if (task.isSuccessful) {
                                     logining.value = false
                                     Log.d("DEBUG", "Create new user successful")
+
+                                    Toast.makeText(context, "Create new user successful", Toast.LENGTH_LONG).show()
                                 } else
                                     Log.d("DEBUG", "Create new user fail")
+                                Toast.makeText(context, "Create new user fail" + task.exception?.localizedMessage, Toast.LENGTH_LONG).show()
                             }
                     }
                 },
@@ -119,15 +125,18 @@ fun loginScreen(navController: NavController, auth: FirebaseAuth, logining: Muta
                 onClick = {
                     if (email.equals("") || pass.equals("")) {
                         Log.d("ERROR", "Email or password shouldn't be empty. Try again.")
+                        Toast.makeText(context, "Email or password shouldn't be empty. Try again.", Toast.LENGTH_LONG).show()
                     }
                     auth.signInWithEmailAndPassword(email.value, pass.value)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
                                 logining.value = false
                                 Log.d("DEBUG", "Logging successful")
+                                Toast.makeText(context, "Logging successful", Toast.LENGTH_LONG).show()
                                 navController?.navigate(MainDestinations.HOME_ROUTE)
                             } else
-                                Log.d("DEBUG", "Logging fail")
+                                Log.d("DEBUG", "Logging fail" + task.exception.toString())
+                            Toast.makeText(context, "Logging fail - " + task.exception?.localizedMessage, Toast.LENGTH_LONG).show()
                         }
 
                 },
